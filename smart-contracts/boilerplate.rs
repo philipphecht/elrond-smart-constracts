@@ -19,4 +19,16 @@ pub trait Boilerplate {
     fn get_data(&self) -> u32{
         0
     }
+     
+    #[endpoint(getContractAddress)]
+    fn get_contract_address(&self){
+        let contract = self.blockchain().get_sc_address();
+    }
+     
+    #[view(getLockedEgldBalance)]
+    fn get_locked_egld_balance(&self) -> BigUint {
+        self.blockchain()
+            .get_sc_balance(&TokenIdentifier::egld(), 0)
+    }
+     
 }
