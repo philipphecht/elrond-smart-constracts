@@ -5,8 +5,11 @@ elrond_wasm::derive_imports!();
 
 #[elrond_wasm::contract]
 pub trait Boilerplate {
-     #[init]
-    fn init(&self) {}
+    #[init]
+    fn init(&self) {
+       //let _my_address: ManagedAddress = self.blockchain().get_caller()
+       //self.set_owner(&_my_address)
+    }
 
     #[endpoint(camelCaseEndpointName)]
     fn snake_case_method_name(&self, value: &BigInt) {
@@ -22,7 +25,7 @@ pub trait Boilerplate {
      
     #[endpoint(getContractAddress)]
     fn get_contract_address(&self){
-        let contract = self.blockchain().get_sc_address();
+        let contract = self.blockchain().get_sc_address()
     }
      
     #[view(getLockedEgldBalance)]
@@ -30,5 +33,8 @@ pub trait Boilerplate {
         self.blockchain()
             .get_sc_balance(&TokenIdentifier::egld(), 0)
     }
+     
+     //#[storage_set("owner")]
+     //fn set_owner(&self, address: &ManagedAddress)
      
 }
