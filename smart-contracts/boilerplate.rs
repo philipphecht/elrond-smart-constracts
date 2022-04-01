@@ -33,6 +33,7 @@ pub trait BoilerPlate {
     #[endpoint(getContractAddress)]
     fn get_contract_address(&self) {
         let contract = self.blockchain().get_sc_address();
+        self.contract().set(contract);
     }
      
     #[view(getLockedEgldBalance)]
@@ -42,5 +43,8 @@ pub trait BoilerPlate {
 
     #[storage_mapper("owner")]
     fn owner(&self) -> SingleValueMapper<ManagedAddress>;
+
+    #[storage_mapper("contract")]
+    fn contract(&self) -> SingleValueMapper<ManagedAddress>;
 
 }
