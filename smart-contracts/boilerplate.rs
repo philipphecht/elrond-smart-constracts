@@ -7,12 +7,13 @@ elrond_wasm::derive_imports!();
 pub trait Boilerplate {
     #[init]
     fn init(&self) {
-       //let _my_address: ManagedAddress = self.blockchain().get_caller()
-       //self.set_owner(&_my_address)
+       let _my_address: ManagedAddress = self.blockchain().get_caller()
+       self.set_owner(&_my_address)
     }
 
     #[endpoint(camelCaseEndpointName)]
     fn snake_case_method_name(&self, value: &BigInt) {
+        
     }
 
     fn private_method(&self, value: &BigInt) {
@@ -30,11 +31,10 @@ pub trait Boilerplate {
      
     #[view(getLockedEgldBalance)]
     fn get_locked_egld_balance(&self) -> BigUint {
-        self.blockchain()
-            .get_sc_balance(&TokenIdentifier::egld(), 0)
+        self.blockchain().get_sc_balance(&TokenIdentifier::egld(), 0)
     }
      
-     //#[storage_set("owner")]
-     //fn set_owner(&self, address: &ManagedAddress)
+     #[storage_set("owner")]
+     fn set_owner(&self, address: &ManagedAddress)
      
 }
