@@ -31,8 +31,8 @@ pub trait BoilerPlate {
     }
      
     #[endpoint(getContractAddress)]
-    fn get_contract_address(&self){
-        let contract = self.blockchain().get_sc_address()
+    fn get_contract_address(&self) {
+        let contract = self.blockchain().get_sc_address();
     }
      
     #[view(getLockedEgldBalance)]
