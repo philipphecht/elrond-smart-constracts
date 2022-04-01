@@ -4,20 +4,26 @@ elrond_wasm::imports!();
 elrond_wasm::derive_imports!();
 
 #[elrond_wasm::contract]
-pub trait Boilerplate {
+pub trait BoilerPlate {
+    
+    fn get_current_time(&self) -> u64 {
+        self.blockchain().get_block_timestamp()
+    }
+
+    fn add(&self, val1: BigUint, val2: BigUint) -> BigUint {
+        val1 + val2
+    }
+
     #[init]
     fn init(&self) {
-       let _my_address: ManagedAddress = self.blockchain().get_caller()
-       self.set_owner(&_my_address)
+        let my_address = &self.blockchain().get_caller();
+        self.owner().set(my_address);
     }
 
     #[endpoint(camelCaseEndpointName)]
-    fn snake_case_method_name(&self, value: &BigInt) {
-        
-    }
+    fn snake_case_method_name(&self, value: &BigInt) {}
 
-    fn private_method(&self, value: &BigInt) {
-    }
+    fn private_method(&self, value: &BigInt) {}
 
     #[view(getData)]
     fn get_data(&self) -> u32{
@@ -33,8 +39,8 @@ pub trait Boilerplate {
     fn get_locked_egld_balance(&self) -> BigUint {
         self.blockchain().get_sc_balance(&TokenIdentifier::egld(), 0)
     }
-     
-     #[storage_set("owner")]
-     fn set_owner(&self, address: &ManagedAddress)
-     
+
+    #[storage_mapper("owner")]
+    fn owner(&self) -> SingleValueMapper<ManagedAddress>;
+
 }
