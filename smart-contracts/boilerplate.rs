@@ -18,6 +18,9 @@ pub trait BoilerPlate {
     fn init(&self) {
         let my_address = &self.blockchain().get_caller();
         self.owner().set(my_address);
+        let contract = self.blockchain().get_sc_address();
+        self.contract().set(contract);
+        
     }
 
     #[endpoint(camelCaseEndpointName)]
@@ -31,10 +34,7 @@ pub trait BoilerPlate {
     }
      
     #[endpoint(getContractAddress)]
-    fn get_contract_address(&self) {
-        let contract = self.blockchain().get_sc_address();
-        self.contract().set(contract);
-    }
+    fn get_contract_address(&self) {}
      
     #[view(getLockedEgldBalance)]
     fn get_locked_egld_balance(&self) -> BigUint {
