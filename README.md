@@ -1,1 +1,1 @@
-# elrond-smart-constracts
+# elrond-smart-contracts
